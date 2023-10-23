@@ -9,7 +9,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS || "http://localhost:3000";
 const httpServer = createServer();
 const io = new Server(httpServer, {
     cors: {
-        origin: allowedOrigins.split(','),
+        origin: '*',
         methods: ['GET', 'POST'],
     },
 });
