@@ -5,7 +5,7 @@ dotenv.config();
 import errorHandler from "./middleware/errorHandler.js";
 import roomsRouter from "./routes/handleRooms.js"
 const app = express();
-const appPort = process.env.APP_PORT || 5555;
+const appPort = process.env.PORT || 5555;
 
 app.listen(appPort,()=>{
     console.log("App is listening on port",appPort);
