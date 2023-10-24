@@ -3,7 +3,7 @@ dotenv.config();
 import { createServer } from "http";
 import {Server} from 'socket.io';
 import { hostLiveTest, joinedTest, makeQuestionActive, revealAnswer, revealOptions, sendAnswerAnalytics, takeLiveTest } from "./controllers/testController.js";
-const socketPort = process.env.SOCKET_PORT || 5500;
+const socketPort = process.env.PORT || 5500;
 const allowedOrigins = process.env.ALLOWED_ORIGINS || "http://localhost:3000";
 
 const httpServer = createServer();
