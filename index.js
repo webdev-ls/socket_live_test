@@ -2,6 +2,7 @@ import express, { json } from "express";
 import cors from "cors";
 import dotenv from "dotenv"
 dotenv.config();
+import io from "./socket.js";
 import errorHandler from "./middleware/errorHandler.js";
 import roomsRouter from "./routes/handleRooms.js"
 const app = express();
