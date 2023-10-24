@@ -6,23 +6,35 @@ import errorHandler from "./middleware/errorHandler.js";
 import roomsRouter from "./routes/handleRooms.js"
 const app = express();
 const appPort = process.env.PORT || 5555;
+const allowedOrigins = process.env.ALLOWED_ORIGINS || "http://localhost:3000";
+
+// Define CORS options
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Check if the origin is in the list of allowedOrigins
+    if (allowedOrigins.split(',').includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 // app.listen(appPort,()=>{
 //     console.log("App is listening on port",appPort);
 // });
 app.use(json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 import { createServer } from "http";
 import {Server} from 'socket.io';
 import { hostLiveTest, joinedTest, makeQuestionActive, revealAnswer, revealOptions, sendAnswerAnalytics, takeLiveTest } from "./controllers/testController.js";
 const socketPort = process.env.PORT || 5500;
-const allowedOrigins = process.env.ALLOWED_ORIGINS || "http://localhost:3000";
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
     cors: {
-        origin: '*',
+        origin: allowedOrigins.split(','),
         methods: ['GET', 'POST'],
     },
 });
